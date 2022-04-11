@@ -1,0 +1,7 @@
+
+[project]
+name = "cookieswap"
+
+# [contracts.counter]
+# path = "contracts/counter.clar"
+# depends_on = []
