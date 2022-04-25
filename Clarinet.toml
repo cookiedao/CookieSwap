@@ -1,7 +1,31 @@
-
 [project]
 name = "cookieswap"
+requirements = []
+costs_version = 1
+[contracts.cookie-dao]
+path = "contracts/cookie-dao.clar"
+depends_on = ["sip-010-trait-ft-standard", "cookie-token"]
 
-# [contracts.counter]
-# path = "contracts/counter.clar"
-# depends_on = []
+[contracts.cookie-dao-token-trait-v1]
+path = "contracts/cookie-dao-token-trait-v1.clar"
+depends_on = []
+
+[contracts.cookie-swap-trait-v1]
+path = "contracts/cookie-swap-trait-v1.clar"
+depends_on = []
+
+[contracts.cookie-swap-v1]
+path = "contracts/cookie-swap-v1.clar"
+depends_on = ["cookie-swap-trait-v1", "cookie-dao", "sip-010-trait-ft-standard", "cookie-dao-token-trait-v1", "wrapped-stx-token"]
+
+[contracts.cookie-token]
+path = "contracts/cookie-token.clar"
+depends_on = ["cookie-dao-token-trait-v1"]
+
+[contracts.sip-010-trait-ft-standard]
+path = "contracts/sip-010-trait-ft-standard.clar"
+depends_on = []
+
+[contracts.wrapped-stx-token]
+path = "contracts/wrapped-stx-token.clar"
+depends_on = ["sip-010-trait-ft-standard", "cookie-dao-token-trait-v1"]
