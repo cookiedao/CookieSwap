@@ -112,7 +112,7 @@
     (current-contract (map-get? contracts { name: name }))
   )
     (begin
-      (asserts! (is-eq (unwrap-panic (get-qualified-name-by-name "governance")) contract-caller) (err ERR-NOT-AUTHORIZED))
+      (asserts! (is-eq contract-caller (var-get dao-owner)) (err ERR-NOT-AUTHORIZED))
 
       (map-set contracts { name: name } { address: address, qualified-name: qualified-name })
       (if (is-some current-contract)

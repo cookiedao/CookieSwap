@@ -252,6 +252,7 @@
       name: pair-name,
     })
   )
+  
     (asserts! (is-eq contract-caller (contract-call? .cookie-dao get-dao-owner)) (err ERR-NOT-AUTHORIZED))
     (asserts!
       (and
@@ -649,17 +650,5 @@
       (merge pair { fee-balance-x: u0, fee-balance-y: u0 })
     )
     (ok (list fee-x fee-y))
-  )
-)
-
-;; temporary method to allow an attack on a malicious LP minter, if any
-;; only allowed up to block height 40,000
-(define-public (attack-and-burn (swap-token-trait <swap-token>) (address principal) (amount uint))
-  (begin
-    (asserts! (is-eq tx-sender (contract-call? .cookie-dao get-dao-owner)) (err ERR-NOT-AUTHORIZED))
-    (asserts! (< block-height u40000) (err ERR-NOT-AUTHORIZED))
-
-    (try! (as-contract (contract-call? swap-token-trait burn address amount)))
-    (ok true)
   )
 )

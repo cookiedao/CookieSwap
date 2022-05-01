@@ -2,7 +2,7 @@
 (impl-trait .cookie-dao-token-trait-v1.dao-token-trait)
 
 ;; Defines the Arkadiko Governance Token according to the SIP010 Standard
-(define-fungible-token diko)
+(define-fungible-token cookie)
 
 (define-data-var token-uri (string-utf8 256) u"")
 (define-data-var contract-owner principal tx-sender)
@@ -23,15 +23,15 @@
 ;; ---------------------------------------------------------
 
 (define-read-only (get-total-supply)
-  (ok (ft-get-supply diko))
+  (ok (ft-get-supply cookie))
 )
 
 (define-read-only (get-name)
-  (ok "Arkadiko Token")
+  (ok "Cookie Token")
 )
 
 (define-read-only (get-symbol)
-  (ok "DIKO")
+  (ok "COOK")
 )
 
 (define-read-only (get-decimals)
@@ -39,7 +39,7 @@
 )
 
 (define-read-only (get-balance (account principal))
-  (ok (ft-get-balance diko account))
+  (ok (ft-get-balance cookie account))
 )
 
 (define-public (set-token-uri (value (string-utf8 256)))
@@ -57,7 +57,7 @@
   (begin
     (asserts! (is-eq tx-sender sender) (err ERR-NOT-AUTHORIZED))
 
-    (match (ft-transfer? diko amount sender recipient)
+    (match (ft-transfer? cookie amount sender recipient)
       response (begin
         (print memo)
         (ok response)
@@ -75,7 +75,7 @@
 (define-public (mint-for-dao (amount uint) (recipient principal))
   (begin
     (asserts! (is-eq contract-caller .cookie-dao) (err ERR-NOT-AUTHORIZED))
-    (ft-mint? diko amount recipient)
+    (ft-mint? cookie amount recipient)
   )
 )
 
@@ -83,7 +83,7 @@
 (define-public (burn-for-dao (amount uint) (sender principal))
   (begin
     (asserts! (is-eq contract-caller .cookie-dao) (err ERR-NOT-AUTHORIZED))
-    (ft-burn? diko amount sender)
+    (ft-burn? cookie amount sender)
   )
 )
 
@@ -91,16 +91,17 @@
 (define-public (burn (amount uint) (sender principal))
   (begin
     (asserts! (is-eq tx-sender sender) (err ERR-NOT-AUTHORIZED))
-    (ft-burn? diko amount sender)
+    (ft-burn? cookie amount sender)
   )
 )
 
 ;; Test environments
 (begin
   ;; TODO: do not do this on testnet or mainnet
-  (try! (ft-mint? diko u890000000000 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM))
-  (try! (ft-mint? diko u150000000000 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5))
-  (try! (ft-mint? diko u150000000000 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG))
-  (try! (ft-mint? diko u1000000000000 'STB2BWB0K5XZGS3FXVTG3TKS46CQVV66NAK3YVN8))
-  (try! (ft-mint? diko u1000000000000 'ST1QV6WVNED49CR34E58CRGA0V58X281FAS1TFBWF))
+  (try! (ft-mint? cookie u890000000000 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM))
+  (try! (ft-mint? cookie u150000000000 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5))
+  (try! (ft-mint? cookie u150000000000 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG))
+  (try! (ft-mint? cookie u1000000000000 'STB2BWB0K5XZGS3FXVTG3TKS46CQVV66NAK3YVN8))
+  (try! (ft-mint? cookie u1000000000000 'ST1QV6WVNED49CR34E58CRGA0V58X281FAS1TFBWF))
+  (try! (ft-mint? cookie u1000000000000 'ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC))
 )

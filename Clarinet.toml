@@ -10,6 +10,10 @@ depends_on = ["sip-010-trait-ft-standard", "cookie-token"]
 path = "contracts/cookie-dao-token-trait-v1.clar"
 depends_on = []
 
+[contracts.cookie-swap-token-wstx-cookie]
+path = "contracts/cookie-swap-token-wstx-cookie.clar"
+depends_on = ["cookie-swap-trait-v1"]
+
 [contracts.cookie-swap-trait-v1]
 path = "contracts/cookie-swap-trait-v1.clar"
 depends_on = []
