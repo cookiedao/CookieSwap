@@ -10,6 +10,26 @@ depends_on = ["sip-010-trait-ft-standard", "cookie-token"]
 path = "contracts/cookie-dao-token-trait-v1.clar"
 depends_on = []
 
+[contracts.cookieswap-stake-pool-trait-v1]
+depends_on = ["sip-010-trait-ft-standard", "cookieswap-stake-registry-trait-v1"]
+path = "contracts/cookieswap-stake-pool-trait-v1.clar"
+
+[contracts.cookieswap-stake-registry-trait-v1]
+depends_on = ["sip-010-trait-ft-standard"]
+path = "contracts/cookieswap-stake-registry-trait-v1.clar"
+
+[contracts.cookieswap-stake-registry-v1]
+depends_on = ["cookie-token", "cookieswap-stake-pool-trait-v1", "sip-010-trait-ft-standard", "cookieswap-stake-registry-trait-v1", "cookieswap-cookie-guardian-v1"]
+path = "contracts/cookieswap-stake-registry-v1.clar"
+
+[contracts.cookieswap-cookie-guardian-v1]
+depends_on = ["cookie-token"]
+path = "contracts/cookieswap-cookie-guardian-v1.clar"
+
+[contracts.cookieswap-stake-pool-wstx-cookie-v1]
+depends_on = ["cookieswap-stake-pool-trait-v1", "cookie-swap-token-wstx-cookie", "cookieswap-stake-registry-v1"]
+path = "contracts/cookieswap-stake-pool-wstx-cookie-v1.clar"
+
 [contracts.cookie-swap-token-wstx-cookie]
 path = "contracts/cookie-swap-token-wstx-cookie.clar"
 depends_on = ["cookie-swap-trait-v1"]

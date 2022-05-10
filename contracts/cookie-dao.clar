@@ -1,12 +1,6 @@
 (use-trait ft-trait .sip-010-trait-ft-standard.sip-010-trait)
 (use-trait dao-token-trait .cookie-dao-token-trait-v1.dao-token-trait)
 
-;; Arkadiko DAO 
-;; 
-;; Keep contracts used in protocol. 
-;; Emergency switch to shut down protocol.
-
-
 ;; Errors
 (define-constant ERR-NOT-AUTHORIZED u100401)
 
